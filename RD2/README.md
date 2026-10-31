@@ -15,8 +15,14 @@ by MRalser (2026).
 - Joystick via the PC game port (RD2 `JoyRead`): joystick A = player two, joystick B = player one.
   The raw Amstrad PC1512/1640 joystick codes are not available under RD2 (no own interrupt handlers);
   the Amstrad BIOS translation to cursor keys still works.
-- Menu: demo, 1 or 2 players, speed (slow/normal/fast), sound. Settings are kept in `RD2.INI` section `[HTron]`.
+- Menu: demo, 1 or 2 players, speed (slow/normal/fast), sound, engine noise. Settings are kept in `RD2.INI` section `[HTron]`.
 - German and English texts (follows the RD2 language setting).
+
+## Sound
+
+Through the RD2 sound driver (PC speaker, AdLib, Sound Blaster): engine hum while driving
+(can be switched off: Options > Engine noise), click when a human player turns, start signal,
+falling crash sound, tunes for win, loss and draw. Options > Sound switches everything off.
 
 ## Controls
 
@@ -60,4 +66,4 @@ In `RD2\SRC` run `BAUEN.BAT`, it writes `RD2\BIN\RDTRON.EXE`:
 `-0` produces 8086 code, `-mm` is the medium memory model. Started directly under DOS the program
 reports that it needs RetroDesk 2.
 
-Status: builds cleanly (10.5 KB, about 22 KB RAM); not yet tested on real hardware.
+Status: builds cleanly (11.2 KB, about 22 KB RAM); not yet tested on real hardware.
