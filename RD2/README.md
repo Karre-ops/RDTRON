@@ -29,19 +29,29 @@ by MRalser (2026).
 | F1 | Controls, F2 new game |
 | Esc | Abort game, on the title screen: quit |
 
-## Files
+## Folder layout
 
-- `HTRON.EXE` ready-built RD2 program (copy to the RD2 folder and start it from the shell)
-- `HTRON.C`, `HTRON.RC` source and resources (texts and menus, code page 437)
-- `SDK/` the parts of the RD2 SDK needed to build: `RD2.H`, `RD2API.H`, `RD2START.ASM`, `RD2.LIB`, `RDRC.EXE`
-- `BAUEN.BAT` build with Open Watcom under DOS
+    RD2/
+      README.md       this file
+      BIN/HTRON.EXE   ready-built RD2 program: the only file you need to play
+      SRC/HTRON.C     source
+      SRC/HTRON.RC    texts and menus (German/English, code page 437)
+      SRC/BAUEN.BAT   build script (Open Watcom, DOS)
+      SDK/            parts of the RD2 SDK needed to build: RD2.H, RD2API.H, RD2START.ASM, RD2.LIB, RDRC.EXE
+
+## Playing
+
+Requires RetroDesk 2 with API 2.0. Copy `BIN/HTRON.EXE` into the RD2 folder (e.g. `C:\RD2\`)
+and start it from the RD2 shell. All other files are only needed to build it yourself.
 
 ## Building
 
-    wcc -0 -mm -os -s -zl -bt=dos -iSDK HTRON.C
-    wasm -0 SDK\RD2START.ASM
-    wlink format dos name HTRON file RD2START,HTRON library SDK\RD2.LIB,clibm.lib option nodefaultlibs
-    SDK\RDRC HTRON.RC HTRON.EXE "H-Tron"
+In `RD2\SRC` run `BAUEN.BAT`, it writes `RD2\BIN\HTRON.EXE`:
+
+    wcc -0 -mm -os -s -zl -bt=dos -i=..\SDK HTRON.C
+    wasm -0 -fo=RD2START.OBJ ..\SDK\RD2START.ASM
+    wlink format dos name ..\BIN\HTRON.EXE file RD2START,HTRON library ..\SDK\RD2.LIB,clibm.lib option nodefaultlibs
+    ..\SDK\RDRC HTRON.RC ..\BIN\HTRON.EXE "H-Tron"
 
 `-0` produces 8086 code, `-mm` is the medium memory model. Started directly under DOS the program
 reports that it needs RetroDesk 2.
