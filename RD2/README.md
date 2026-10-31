@@ -33,25 +33,29 @@ by MRalser (2026).
 
     RD2/
       README.md       this file
-      BIN/HTRON.EXE   ready-built RD2 program: the only file you need to play
-      SRC/HTRON.C     source
-      SRC/HTRON.RC    texts and menus (German/English, code page 437)
+      BIN/RDTRON.EXE   ready-built RD2 program: the only file you need to play
+      SRC/RDTRON.C     source
+      SRC/RDTRON.RC    texts and menus (German/English, code page 437)
       SRC/BAUEN.BAT   build script (Open Watcom, DOS)
       SDK/            parts of the RD2 SDK needed to build: RD2.H, RD2API.H, RD2START.ASM, RD2.LIB, RDRC.EXE
 
 ## Playing
 
-Requires RetroDesk 2 with API 2.0. Copy `BIN/HTRON.EXE` into the RD2 folder (e.g. `C:\RD2\`)
+The RD2 program is called `RDTRON.EXE` on purpose: DOS ignores upper/lower case, so `HTRON.EXE`
+would clash with the DOS version `Htron.exe` in the main folder of this repo.
+
+
+Requires RetroDesk 2 with API 2.0. Copy `BIN/RDTRON.EXE` into the RD2 folder (e.g. `C:\RD2\`)
 and start it from the RD2 shell. All other files are only needed to build it yourself.
 
 ## Building
 
-In `RD2\SRC` run `BAUEN.BAT`, it writes `RD2\BIN\HTRON.EXE`:
+In `RD2\SRC` run `BAUEN.BAT`, it writes `RD2\BIN\RDTRON.EXE`:
 
-    wcc -0 -mm -os -s -zl -bt=dos -i=..\SDK HTRON.C
+    wcc -0 -mm -os -s -zl -bt=dos -i=..\SDK RDTRON.C
     wasm -0 -fo=RD2START.OBJ ..\SDK\RD2START.ASM
-    wlink format dos name ..\BIN\HTRON.EXE file RD2START,HTRON library ..\SDK\RD2.LIB,clibm.lib option nodefaultlibs
-    ..\SDK\RDRC HTRON.RC ..\BIN\HTRON.EXE "H-Tron"
+    wlink format dos name ..\BIN\RDTRON.EXE file RD2START,RDTRON library ..\SDK\RD2.LIB,clibm.lib option nodefaultlibs
+    ..\SDK\RDRC RDTRON.RC ..\BIN\RDTRON.EXE "H-Tron"
 
 `-0` produces 8086 code, `-mm` is the medium memory model. Started directly under DOS the program
 reports that it needs RetroDesk 2.
